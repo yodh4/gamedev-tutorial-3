@@ -93,3 +93,58 @@
         velocity.x = 0
         _animated_sprite.play("default")
     ```
+
+<br>
+
+## Tutorial 5
+
+1. Objek yang sudah dilengkapi animasi telah dibuat di tutorial 3
+2. Menggunakan dua sfx untuk suara lompat dan suara koin
+3. Menggunakan background music dari tutorial
+4. Membuat interaksi sfx lompat dengan menambahkan kode berikut:
+```
+@export var sfx_jump: AudioStream 
+
+func load_sfx(sfx_to_load):
+	if %sfx_player.stream != sfx_to_load:
+		%sfx_player.stop()
+		%sfx_player.stream = sfx_to_load
+```
+
+```
+elif is_on_floor() and Input.is_action_just_pressed("ui_up"):
+		walk_speed = 200
+		velocity.y = jump_speed
+		load_sfx(sfx_jump)
+		%sfx_player.play()
+		is_double_jumped = false
+		isJumped = true	
+elif not is_on_floor() and isJumped and not is_double_jumped and Input is_action_just_pressed("ui_up"):
+    walk_speed = 200
+    velocity.y = jump_speed
+    load_sfx(sfx_jump)
+    %sfx_player.play()
+    isJumped = true
+    is_double_jumped = true
+```
+
+5. Membuat interaksi suara koin dengan objek yang diberi spritesheet logo fasilkom dengan membuat scene `Item.tscn` lalu menambahkan kode berikut:
+``` 
+extends Area2D
+
+@export var sfx_coin: AudioStream
+
+func _ready() -> void:
+	connect("body_entered", _on_body_entered)
+
+func _on_body_entered(body: Node) -> void:
+	if body.name == "Player":
+		load_sfx(sfx_coin)
+		%sfx_player.play()
+		queue_free()
+
+func load_sfx(sfx_to_load):
+	if %sfx_player.stream != sfx_to_load:
+		%sfx_player.stop()
+		%sfx_player.stream = sfx_to_load
+```

@@ -1,0 +1,59 @@
+[gd_scene load_steps=10 format=3 uid="uid://c3mfkybsfcb17"]
+
+[ext_resource type="Script" path="res://scenes/lab 5/PlayerTutor5.gd" id="1_yg8ub"]
+[ext_resource type="Texture2D" uid="uid://d1ujqe7airurj" path="res://assets/kenney_platformercharacters/PNG/Adventurer/Poses/adventurer_duck.png" id="2_7v72j"]
+[ext_resource type="AudioStream" uid="uid://c3v0h82i2tf8f" path="res://assets/audio/jump.wav" id="2_cf75y"]
+[ext_resource type="Texture2D" uid="uid://cq0ccy1o814d5" path="res://assets/kenney_platformercharacters/PNG/Adventurer/Poses/adventurer_slide.png" id="3_du8kx"]
+[ext_resource type="Texture2D" uid="uid://dg3q4a7elmavw" path="res://assets/kenney_platformercharacters/PNG/Adventurer/Poses/adventurer_idle.png" id="4_0rbvq"]
+[ext_resource type="Texture2D" uid="uid://cademvw3gv8rr" path="res://assets/kenney_platformercharacters/PNG/Adventurer/Poses/adventurer_walk1.png" id="5_4b8m0"]
+[ext_resource type="Texture2D" uid="uid://dmn8133tt40x1" path="res://assets/kenney_platformercharacters/PNG/Adventurer/Poses/adventurer_walk2.png" id="6_bpid8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f3qkv"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_r0vul"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_7v72j")
+}],
+"loop": true,
+"name": &"crouch",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_du8kx")
+}],
+"loop": true,
+"name": &"dash",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_0rbvq")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_4b8m0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_bpid8")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 10.0
+}]
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_yg8ub")
+sfx_jump = ExtResource("2_cf75y")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_f3qkv")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_r0vul")

@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://bfbwtm4oovkeg"]
+
+[ext_resource type="Script" path="res://scenes/lab 5/Item.gd" id="1_bahvk"]
+[ext_resource type="Texture2D" uid="uid://cirwssqa1y3jv" path="res://assets/fasilkom.png" id="1_x5p60"]
+[ext_resource type="AudioStream" uid="uid://bd87nn71mwgkh" path="res://assets/audio/coin.wav" id="2_x8lxf"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5mqlv"]
+
+[node name="Item" type="Area2D"]
+script = ExtResource("1_bahvk")
+sfx_coin = ExtResource("2_x8lxf")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, 2)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_x5p60")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 5)
+scale = Vector2(4, 4)
+shape = SubResource("CircleShape2D_5mqlv")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
